@@ -25,7 +25,7 @@ for i in range(7):
 print ""
 for i in range(7):
 	print yTime,"00:00"
- 
+print weekb
 
 print yesterday, "test branch werew"
 
