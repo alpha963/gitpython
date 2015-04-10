@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # coding=utf-8
 import paramiko
-import openfile
+from openfile import openinfo,comm
 import sysinf
 import datetime
 import sqlite3
@@ -18,23 +18,21 @@ def sysinfos(mip,user,xpasswd,com1,com2,com3,com4):
 	return (stdout1,stdout2,stdout3,stdout4)
 	ssh.close
 
-y=openfile.openinfo(r"D:\msg\gitpython\gitpython\config\conf.ini")
-z=openfile.openinfo(r"D:\msg\gitpython\gitpython\config\sysaddr.ini")
+y=openinfo(r"D:\msg\gitpython\gitpython\config\conf.ini")
+z=[]
+for i in range(len(y)-2):
+	z.append(y[i+2])
+
 ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
-comm=("mpstat|awk  '{if($11!~/idle/) print $11}'","mpstat|awk  '{if($12!~/idle/) print $12}'",\
-"free -m|awk  '{if($1!~/total/) print $2,$4,$7}'|head -1",\
-"df -hl|awk  '{if($5!~/Use/) print $3,$4,$5}'","df -hl|awk  '{if($5!~/Use/) print $4,$5,$6}'",\
-"ps -ef|wc -l")
 
 cs=[];frees=[];diss=[];pss=[]
 
 for i in range(9):
 	if i<6:
-		cpuf,freef,discf,psf=sysinfos(z[i],y[1],y[2],comm[0],comm[2],comm[3],comm[5])
+		cpuf,freef,discf,psf=sysinfos(z[i],y[0],y[1],comm[0],comm[2],comm[3],comm[5])
 	else:
-		cpuf,freef,discf,psf=sysinfos(z[i],y[1],y[2],comm[1],comm[2],comm[4],comm[5])
+		cpuf,freef,discf,psf=sysinfos(z[i],y[0],y[1],comm[1],comm[2],comm[4],comm[5])
 	p="%.4f" % sysinf.cpuinfo(cpuf,3)
 	f="%.4f" % sysinf.freeinfo(freef)
 	d=sysinf.discmax(discf,9)
