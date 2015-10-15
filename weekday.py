@@ -6,6 +6,8 @@ for i in range(7):
 	todays.append(y)
 	print todays[i],"00:00"
 print todays
+to=todays[::-1]
+print to
 
 
 
