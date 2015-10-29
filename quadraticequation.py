@@ -15,8 +15,4 @@ def power(x,n):
 
 print(quadratic(2, 3, 1))
 print(quadratic(1, 3, -4))
-print (power(2,8))
-
-
-
-	
+print (power(2,8))	

@@ -1,6 +1,7 @@
 #coding=utf-8
 #python2.7.10
 import datetime
+import os
 
 def openinfo(filenam):
 	infoip= open(filenam)  
@@ -22,13 +23,11 @@ t=[]
 for i in range(len(y)):
 	x=y[i].find('ConsoleMessage')
 	if x!=-1:
-		t.append(y[i])
+		t.append(y[i]+'\n')
 	else:
 		pass
 
-for i in range(len(t)):
-	print (t[i])
+f=open("d:\hello.txt","a+")
+f.writelines(t)
+f.close()
 print ('Connection closed in finally\n')
-
-
-

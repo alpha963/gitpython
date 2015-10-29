@@ -8,11 +8,3 @@ for i in range(7):
 print todays
 to=todays[::-1]
 print to
-
-
-
-
-
-
-
-	
